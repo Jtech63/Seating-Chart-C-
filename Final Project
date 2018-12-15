@@ -1,0 +1,70 @@
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void displayPriceButton_Click(object sender, EventArgs e)
+        {
+            int row, col; // row and column variable
+            const int MAX_ROW = 5; // max row const
+            const int MAX_COL = 3; // max column cont
+
+            // array with seat prices
+            decimal[,] prices = { {450m, 450m, 450m, 450m},
+                                  {425m, 425m, 425m, 425m},
+                                  {400m, 400m, 400m, 400m},
+                                  {375m, 375m, 375m, 375m},
+                                  {375m, 375m, 375m, 375m},
+                                  {350m, 350m, 350m, 350m}
+                                };
+            // Get row number
+            if (int.TryParse(rowTextBox.Text, out row))
+            {
+                // Get column number
+                if (int.TryParse(columnTextBox.Text, out col))
+                {
+                    if (row >= 0 && row <= MAX_ROW) // check if row is in range
+                    {
+                        if (col >= 0 && col <= MAX_COL) // check if column is in range
+                        {
+                            priceLabel.Text =           // display price based on array
+                                 prices[row, col].ToString("c");
+                        }
+                        else
+                        {
+                            // invalid number for column error message
+                            MessageBox.Show("Column must be 0 through "
+                                + MAX_COL);
+                        }
+                    }
+                    else
+                    {
+                        //invalid number for row error message
+                        MessageBox.Show("Row must be 0 through "
+                                   + MAX_ROW);
+                    }
+                }
+                else
+                {
+                    // invalid input in column text box
+                    MessageBox.Show("Enter an integer for the column.");
+                }
+            }
+            else
+            {           // invalid input in row text box
+                MessageBox.Show("Enter an integer for the row.");
+            }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
